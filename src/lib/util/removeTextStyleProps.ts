@@ -1,6 +1,8 @@
 import textStyleProps from '../data/textStyleProps';
 
-export default function removeTextStyleProps(style) {
+export default function removeTextStyleProps(
+  style: Record<string, unknown>,
+): Record<string, unknown> {
   const intersection = textStyleProps.filter((value) =>
     Object.keys(style).includes(value),
   );

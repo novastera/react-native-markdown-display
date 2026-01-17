@@ -1,10 +1,23 @@
 {
-  "name": "react-native-markdown-display",
-  "version": "7.0.2",
-  "description": "Markdown renderer for react-native, with CommonMark spec support + adds syntax extensions & sugar (URL autolinking, typographer), originally created by Mient-jan Stelling as react-native-markdown-renderer",
-  "main": "src/index.js",
-  "types": "src/index.d.ts",
+  "name": "@novastera-oss/react-native-markdown-display",
+  "version": "8.0.0",
+  "description": "Markdown renderer for react-native, with CommonMark spec support. Maintained by Novastera.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
+    "build:types": "tsc -p tsconfig.types.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build": "npm run build:types && npm run build:esm && npm run build:cjs",
     "lint": "./node_modules/.bin/eslint --fix --cache ./src"
   },
   "pre-commit": [
@@ -12,7 +25,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iamacup/react-native-markdown-display.git"
+    "url": "git+https://github.com/novastera/react-native-markdown-display.git"
   },
   "keywords": [
     "react",
@@ -20,34 +33,37 @@
     "native",
     "markdown",
     "commonmark",
-    "markdown-it"
+    "markdown-it",
+    "crm",
+    "erp",
+    "novastera"
   ],
-  "author": "Mient-jan Stelling and Tom Pickard + others from the community",
+  "author": "Novastera (originally by Mient-jan Stelling and Tom Pickard + community)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/iamacup/react-native-markdown-display/issues"
+    "url": "https://github.com/novastera/react-native-markdown-display/issues"
   },
-  "homepage": "https://github.com/iamacup/react-native-markdown-display/",
+  "homepage": "https://novastera.com",
   "dependencies": {
-    "css-to-react-native": "^3.0.0",
-    "markdown-it": "^10.0.0",
-    "prop-types": "^15.7.2",
-    "react-native-fit-image": "^1.5.5"
+    "markdown-it": "^14.1.0",
+    "expo-image": "^3.0.0"
   },
   "peerDependencies": {
-    "react": ">=16.2.0",
-    "react-native": ">=0.50.4"
+    "react": ">=18.0.0",
+    "react-native": ">=0.79.0"
   },
   "devDependencies": {
-    "@types/markdown-it": "^10.0.1",
-    "@types/react-native": ">=0.50.0",
+    "@types/markdown-it": "^14.1.0",
+    "@types/react": "^19.0.0",
     "@babel/core": "^7.9.6",
     "@babel/runtime": "^7.9.6",
-    "@react-native-community/eslint-config": "^1.1.0",
-    "@typescript-eslint/parser": "^2.32.0",
-    "eslint": "^7.0.0",
-    "json-schema": "^0.2.5",
-    "pre-commit": "1.2.2",
-    "typescript": "^3.8.3"
-  }
+    "@typescript-eslint/parser": "^8.53.0",
+    "eslint": "^9.0.0",
+    "typescript": "^5.9.3"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ]
 }

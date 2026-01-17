@@ -1,8 +1,9 @@
 import getTokenTypeByToken from './getTokenTypeByToken';
 import flattenInlineTokens from './flattenInlineTokens';
 import renderInlineAsText from './renderInlineAsText';
+import type {MarkdownTokenLike} from '../../types';
 
-export function cleanupTokens(tokens) {
+export function cleanupTokens(tokens: MarkdownTokenLike[]): MarkdownTokenLike[] {
   tokens = flattenInlineTokens(tokens);
   tokens.forEach((token) => {
     token.type = getTokenTypeByToken(token);
@@ -13,10 +14,14 @@ export function cleanupTokens(tokens) {
     }
 
     // Set img alt text
-    if (token.type === 'image') {
-      token.attrs[token.attrIndex('alt')][1] = renderInlineAsText(
-        token.children,
-      );
+    if (token.type === 'image' && token.attrs) {
+      const altIndex =
+        typeof token.attrIndex === 'function'
+          ? token.attrIndex('alt')
+          : token.attrs.findIndex((attr) => attr[0] === 'alt');
+      if (altIndex >= 0) {
+        token.attrs[altIndex][1] = renderInlineAsText(token.children ?? []);
+      }
     }
   });
 
@@ -24,8 +29,8 @@ export function cleanupTokens(tokens) {
    * changing a link token to a blocklink to fix issue where link tokens with
    * nested non text tokens breaks component
    */
-  const stack = [];
-  tokens = tokens.reduce((acc, token, index) => {
+  const stack: MarkdownTokenLike[] = [];
+  tokens = tokens.reduce<MarkdownTokenLike[]>((acc, token) => {
     if (token.type === 'link' && token.nesting === 1) {
       stack.push(token);
     } else if (
@@ -43,7 +48,7 @@ export function cleanupTokens(tokens) {
       stack.push(token);
 
       while (stack.length) {
-        acc.push(stack.shift());
+        acc.push(stack.shift() as MarkdownTokenLike);
       }
     } else if (stack.length > 0) {
       stack.push(token);

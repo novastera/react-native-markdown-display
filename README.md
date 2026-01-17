@@ -1,4 +1,4 @@
-# React Native Markdown Display [![npm version](https://badge.fury.io/js/react-native-markdown-display.svg)](https://badge.fury.io/js/react-native-markdown-display) [![Known Vulnerabilities](https://snyk.io/test/github/iamacup/react-native-markdown-display/badge.svg)](https://snyk.io/test/github/iamacup/react-native-markdown-display)
+# React Native Markdown Display
 
 It a 100% compatible CommonMark renderer, a react-native markdown renderer done right. This is __not__ a web-view markdown renderer but a renderer that uses native components for all its elements. These components can be overwritten and styled as needed.
 
@@ -10,13 +10,17 @@ This is intended to be a replacement for react-native-markdown-renderer, with a 
 
 #### Yarn
 ```npm
-yarn add react-native-markdown-display
+yarn add @novastera-oss/react-native-markdown-display
 ```
 
 #### NPM
 ```npm
-npm install -S react-native-markdown-display
+npm install -S @novastera-oss/react-native-markdown-display
 ```
+
+### Breaking Changes
+
+See `BREAKING_CHANGE.md` for the full migration notes from the legacy version.
 
 ### Get Started
 
@@ -24,7 +28,7 @@ npm install -S react-native-markdown-display
 import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 
-import Markdown from 'react-native-markdown-display';
+import Markdown from '@novastera-oss/react-native-markdown-display';
 
 const copy = `# h1 Heading 8-)
 
@@ -346,7 +350,7 @@ Identify the new components and integrate the plugin with a rendered component. 
 import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 
-import Markdown, { MarkdownIt } from 'react-native-markdown-display';
+import Markdown, { MarkdownIt } from '@novastera-oss/react-native-markdown-display';
 import blockEmbedPlugin from 'markdown-it-block-embed';
 
 const markdownItInstance = 
@@ -412,7 +416,7 @@ We need to create the **render rules** and **styles** to handle this new **'vide
 import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 
-import Markdown, { MarkdownIt } from 'react-native-markdown-display';
+import Markdown, { MarkdownIt } from '@novastera-oss/react-native-markdown-display';
 import blockEmbedPlugin from 'markdown-it-block-embed';
 
 const markdownItInstance = 
@@ -499,7 +503,7 @@ And all of the video properties needed to render something meaningful are on the
 You can do some additional debugging of what the markdown instance is spitting out like this:
 
 ```jsx
-import Markdown, { MarkdownIt } from 'react-native-markdown-display';
+import Markdown, { MarkdownIt } from '@novastera-oss/react-native-markdown-display';
 import blockEmbedPlugin from 'markdown-it-block-embed';
 
 const markdownItInstance = 
@@ -731,7 +735,7 @@ Think of the implementation like applying styles in CSS. changes to the `body` e
 import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 
-import Markdown from 'react-native-markdown-display';
+import Markdown from '@novastera-oss/react-native-markdown-display';
 
 const copy = `
 This is some text which is red because of the body style, which is also really small!
@@ -783,9 +787,18 @@ export default App;
 
 ### Styles 
 
-Styles are used to override how certain rules are styled. The existing implementation is [here](https://github.com/iamacup/react-native-markdown-display/blob/master/src/lib/styles.js)
+Styles are used to override how certain rules are styled. The existing
+implementation is in `src/lib/styles.ts`.
 
-**NOTE:** By default styles are merged with the existing implementation, to change this, see the `mergeStyle` prop
+**NOTE:** By default styles are merged with the existing implementation, to
+change this, see the `mergeStyle` prop.
+
+#### Inline CSS (HTML style attributes)
+
+Inline `style="..."` attributes inside markdown are supported only with a
+minimal parser. It accepts simple `key:value;` pairs and basic numeric/`px`
+values, and is not a full CSS engine. For anything complex, use the `style`
+prop or custom `rules`.
 
 <details><summary>Example Implementation</summary>
 <p>
@@ -794,7 +807,7 @@ Styles are used to override how certain rules are styled. The existing implement
 import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native';
 
-import Markdown from 'react-native-markdown-display';
+import Markdown from '@novastera-oss/react-native-markdown-display';
 
 const styles = StyleSheet.create({
   heading1: {
@@ -868,7 +881,7 @@ Rules are used to specify how you want certain elements to be displayed. The exi
 import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar, Text } from 'react-native';
 
-import Markdown from 'react-native-markdown-display';
+import Markdown from '@novastera-oss/react-native-markdown-display';
 
 const rules = {
     heading1: (node, children, parent, styles) =>
@@ -977,7 +990,7 @@ It is possible to overwrite this behaviour in one of two ways:
 import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 
-import Markdown from 'react-native-markdown-display';
+import Markdown from '@novastera-oss/react-native-markdown-display';
 
 const copy = `[This is a link!](https://github.com/iamacup/react-native-markdown-display/)`;
 
@@ -1029,7 +1042,7 @@ Something like this with `yourCustomHandlerFunctionOrLogicHere`:
 import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar, Text } from 'react-native';
 
-import Markdown from 'react-native-markdown-display';
+import Markdown from '@novastera-oss/react-native-markdown-display';
 
 const copy = `[This is a link!](https://github.com/iamacup/react-native-markdown-display/)`;
 
@@ -1080,7 +1093,7 @@ This example will stop images and links.
 import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar, Text } from 'react-native';
 
-import Markdown, { MarkdownIt } from 'react-native-markdown-display';
+import Markdown, { MarkdownIt } from '@novastera-oss/react-native-markdown-display';
 
 const copy = `
 # This heading will show with formatting
@@ -1124,7 +1137,7 @@ It is possible to need to pre-process the data outside of this library ([related
 import React from 'react';
 import { SafeAreaView, ScrollView, StatusBar, Text } from 'react-native';
 
-import Markdown, { MarkdownIt, tokensToAST, stringToTokens } from 'react-native-markdown-display';
+import Markdown, { MarkdownIt, tokensToAST, stringToTokens } from '@novastera-oss/react-native-markdown-display';
 
 const markdownItInstance = MarkdownIt({typographer: true});
 
@@ -1162,3 +1175,32 @@ export default App;
 ### Other Notes
 
 This is a fork of [react-native-markdown-renderer](https://github.com/mientjan/react-native-markdown-renderer), a library that unfortunately has not been updated for some time so i took all of the outstanding pull requests from that library and tested + merged as necessary.
+
+## About Novastera
+
+This library is part of the Novastera open-source ecosystem, a modern CRM/ERP
+platform designed for the next generation of business applications. Novastera
+combines AI capabilities with comprehensive business management tools, enabling
+organizations to leverage on-device AI for enhanced productivity and data
+privacy.
+
+### Key Features of Novastera Platform
+
+- Modern CRM/ERP system with AI-powered insights
+- On-device AI with a privacy-first approach
+- Mobile-first native iOS and Android apps built with React Native
+- Open-source commitment to developer-friendly tooling
+
+This library is currently used in Novastera’s mobile application, demonstrating
+its capabilities in production environments. We are committed to enabling
+privacy-preserving AI and building tools that respect user data.
+
+Learn more about Novastera: https://novastera.com/resources
+
+## Acknowledgments
+
+Complete rework by Hassan Allybocus.
+
+Foundation and original authors:
+- Mient-jan Stelling and Tom Pickard
+- The react-native-markdown-renderer community

@@ -1,6 +1,10 @@
-export default function omitListItemParagraph(tokens) {
+import type {MarkdownTokenLike} from '../../types';
+
+export default function omitListItemParagraph(
+  tokens: MarkdownTokenLike[],
+): MarkdownTokenLike[] {
   // used to ensure that we remove the correct ending paragraph token
-  let depth = null;
+  let depth: number | null = null;
   return tokens.filter((token, index) => {
     // update depth if we've already removed a starting paragraph token
     if (depth !== null) {

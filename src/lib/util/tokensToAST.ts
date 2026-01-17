@@ -1,20 +1,15 @@
 import getUniqueID from './getUniqueID';
 import getTokenTypeByToken from './getTokenTypeByToken';
+import type {ASTNode, MarkdownTokenLike} from '../../types';
 
-/**
- *
- * @param {{type: string, tag:string, content: string, children: *, attrs: Array, meta, info, block: boolean}} token
- * @param {number} tokenIndex
- * @return {{type: string, content, tokenIndex: *, index: number, attributes: {}, children: *}}
- */
-function createNode(token, tokenIndex) {
+function createNode(token: MarkdownTokenLike, tokenIndex: number): ASTNode {
   const type = getTokenTypeByToken(token);
-  const content = token.content;
+  const content = token.content ?? '';
 
-  let attributes = {};
+  let attributes: Record<string, unknown> = {};
 
   if (token.attrs) {
-    attributes = token.attrs.reduce((prev, curr) => {
+    attributes = token.attrs.reduce<Record<string, unknown>>((prev, curr) => {
       const [name, value] = curr;
       return {...prev, [name]: value};
     }, {});
@@ -26,24 +21,19 @@ function createNode(token, tokenIndex) {
     sourceInfo: token.info,
     sourceMeta: token.meta,
     block: token.block,
-    markup: token.markup,
-    key: getUniqueID() + '_' + type,
+    markup: token.markup ?? '',
+    key: `${getUniqueID()}_${type}`,
     content,
     tokenIndex,
     index: 0,
     attributes,
-    children: tokensToAST(token.children),
+    children: tokensToAST(token.children ?? []),
   };
 }
 
-/**
- *
- * @param {Array<{type: string, tag:string, content: string, children: *, attrs: Array}>}tokens
- * @return {Array}
- */
-export default function tokensToAST(tokens) {
-  let stack = [];
-  let children = [];
+export default function tokensToAST(tokens: MarkdownTokenLike[]): ASTNode[] {
+  let stack: ASTNode[][] = [];
+  let children: ASTNode[] = [];
 
   if (!tokens || tokens.length === 0) {
     return [];
@@ -67,7 +57,7 @@ export default function tokensToAST(tokens) {
         stack.push(children);
         children = astNode.children;
       } else if (token.nesting === -1) {
-        children = stack.pop();
+        children = stack.pop() ?? [];
       } else if (token.nesting === 0) {
         children.push(astNode);
       }

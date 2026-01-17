@@ -1,4 +1,4 @@
-export default [
+const textStyleProps = [
   'textShadowOffset',
   'color',
   'fontSize',
@@ -18,4 +18,6 @@ export default [
   'textDecorationStyle',
   'textTransform',
   'writingDirection',
-];
+] as const;
+
+export default textStyleProps;

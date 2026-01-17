@@ -1,17 +1,17 @@
+import type {ReactNode} from 'react';
+
 import tokensToAST from './util/tokensToAST';
 import {stringToTokens} from './util/stringToTokens';
 import {cleanupTokens} from './util/cleanupTokens';
 import groupTextTokens from './util/groupTextTokens';
 import omitListItemParagraph from './util/omitListItemParagraph';
+import type {ASTNode, MarkdownParser} from '../types';
 
-/**
- *
- * @param {string} source
- * @param {function} [renderer]
- * @param {AstRenderer} [markdownIt]
- * @return {View}
- */
-export default function parser(source, renderer, markdownIt) {
+export default function parser(
+  source: string | ASTNode[],
+  renderer: (nodes: ASTNode[]) => ReactNode,
+  markdownIt: MarkdownParser,
+): ReactNode {
   if (Array.isArray(source)) {
     return renderer(source);
   }
