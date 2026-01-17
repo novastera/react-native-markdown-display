@@ -1,10 +1,6 @@
 # React Native Markdown Display
 
-It a 100% compatible CommonMark renderer, a react-native markdown renderer done right. This is __not__ a web-view markdown renderer but a renderer that uses native components for all its elements. These components can be overwritten and styled as needed.
-
-### Compatibility with react-native-markdown-renderer
-
-This is intended to be a replacement for react-native-markdown-renderer, with a variety of bug fixes and enhancements - **Due to how the new style rules work, there may be some tweaking needed**, [see how to style stuff section below](#How-to-style-stuff)
+It is a CommonMark-compatible React Native markdown renderer that uses native components rather than a web view. Maintained by Novastera, an open-source CRM/ERP platform, it is designed to be easy to theme and extend.
 
 ### Install
 
@@ -37,7 +33,7 @@ const copy = `# h1 Heading 8-)
 This is normal text
 `;
 
-const App: () => React$Node = () => {
+const App: () => React.ReactNode = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -66,9 +62,9 @@ The `<Markdown>` object takes the following common props:
 | Property | Default | Required | Description                                                      
 | --- | --- | --- | ---
 | `children` | N/A | `true` | The markdown string to render, or the [pre-processed tree](#pre-processing)
-| `style` | [source](https://github.com/iamacup/react-native-markdown-display/blob/master/src/lib/styles.js) | `false` | An object to override the styling for the various rules, [see style section below](#rules-and-styles) for more info
+| `style` | [source](https://github.com/novastera/react-native-markdown-display/blob/master/src/lib/styles.ts) | `false` | An object to override the styling for the various rules, [see style section below](#rules-and-styles) for more info
 | `mergeStyle` | `true` | `false` | If true, when a style is supplied, the individual items are merged with the default styles instead of overwriting them
-| `rules` | [source](https://github.com/iamacup/react-native-markdown-display/blob/master/src/lib/renderRules.js) | `false` | An object of rules that specify how to render each markdown item, [see rules section below](#rules) for more info
+| `rules` | [source](https://github.com/novastera/react-native-markdown-display/blob/master/src/lib/renderRules.tsx) | `false` | An object of rules that specify how to render each markdown item, [see rules section below](#rules) for more info
 | `onLinkPress` | `import { Linking } from 'react-native';` and `Linking.openURL(url);` | `false` | A handler function to change click behaviour, [see handling links section below](#handling-links) for more info
 | `debugPrintTree` | `false` | `false` | Will print the AST tree to the console to help you see what the markdown is being translated to
 
@@ -101,7 +97,7 @@ And some additional, less used options:
 
 | iOS | Android
 | --- | ---
-| <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/ios-1.png"/>  | <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/android-1.png"/>  
+| <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/ios-1.png"/>  | <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/android-1.png"/>  
 
 </p>
 </details>
@@ -123,7 +119,7 @@ And some additional, less used options:
 
 | iOS | Android
 | --- | ---
-| <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/ios-2.png"/>  | <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/android-2.png"/>  
+| <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/ios-2.png"/>  | <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/android-2.png"/>  
 
 
 </p>
@@ -148,7 +144,7 @@ And some additional, less used options:
 
 | iOS | Android
 | --- | ---
-| <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/ios-4.png"/>  | <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/android-4.png"/>  
+| <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/ios-4.png"/>  | <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/android-4.png"/>  
 
 </p>
 </details>
@@ -165,7 +161,7 @@ And some additional, less used options:
 
 | iOS | Android
 | --- | ---
-| <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/ios-5.png"/>  | <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/android-5.png"/>  
+| <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/ios-5.png"/>  | <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/android-5.png"/>  
 
 </p>
 </details>
@@ -199,7 +195,7 @@ And some additional, less used options:
 
 | iOS | Android
 | --- | ---
-| <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/ios-6.png"/>  | <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/android-6.png"/>  
+| <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/ios-6.png"/>  | <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/android-6.png"/>  
 
 </p>
 </details>
@@ -238,7 +234,7 @@ And some additional, less used options:
 
 | iOS | Android
 | --- | ---
-| <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/ios-7.png"/>  | <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/android-7.png"/>  
+| <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/ios-7.png"/>  | <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/android-7.png"/>  
 
 </p>
 </details>
@@ -265,7 +261,7 @@ And some additional, less used options:
 
 | iOS | Android
 | --- | ---
-| <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/ios-8.png"/>  | <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/android-8.png"/>  
+| <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/ios-8.png"/>  | <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/android-8.png"/>  
 
 </p>
 </details>
@@ -283,7 +279,7 @@ And some additional, less used options:
 
 | iOS | Android
 | --- | ---
-| <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/ios-9.png"/>  | <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/android-9.png"/>  
+| <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/ios-9.png"/>  | <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/android-9.png"/>  
 
 </p>
 </details>
@@ -306,7 +302,7 @@ And some additional, less used options:
 
 | iOS | Android
 | --- | ---
-| <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/ios-10.png"/>  | <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/android-10.png"/>  
+| <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/ios-10.png"/>  | <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/android-10.png"/>  
 
 </p>
 </details>
@@ -329,7 +325,7 @@ And some additional, less used options:
 
 | iOS | Android
 | --- | ---
-| <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/ios-3.png"/>  | <img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/android-3.png"/>  
+| <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/ios-3.png"/>  | <img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/android-3.png"/>  
 
 </p>
 </details>
@@ -365,7 +361,7 @@ const copy = `
 @[youtube](lJIrF4YjHfQ)
 `;
 
-const App: () => React$Node = () => {
+const App: () => React.ReactNode = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -431,7 +427,7 @@ const copy = `
 @[youtube](lJIrF4YjHfQ)
 `;
 
-const App: () => React$Node = () => {
+const App: () => React.ReactNode = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -729,7 +725,7 @@ Think of the implementation like applying styles in CSS. changes to the `body` e
 <details><summary>Example</summary>
 <p>
 
-<img src="https://github.com/iamacup/react-native-markdown-display/raw/master/doc/images/style-example.png"/> 
+<img src="https://github.com/novastera/react-native-markdown-display/raw/master/doc/images/style-example.png"/> 
 
 ```jsx
 import React from 'react';
@@ -755,7 +751,7 @@ and some more small text
 ### this is a h3
 `;
 
-const App: () => React$Node = () => {
+const App: () => React.ReactNode = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -844,7 +840,7 @@ const copy = `
 | ext    | extension to be used for dest files. |
 `;
 
-const App: () => React$Node = () => {
+const App: () => React.ReactNode = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -872,7 +868,7 @@ export default App;
 
 ### Rules
 
-Rules are used to specify how you want certain elements to be displayed. The existing implementation is [here](https://github.com/iamacup/react-native-markdown-display/blob/master/src/lib/renderRules.js)
+Rules are used to specify how you want certain elements to be displayed. The existing implementation is here: https://github.com/novastera/react-native-markdown-display/blob/master/src/lib/renderRules.tsx
 
 <details><summary>Example Implementation</summary>
 <p>
@@ -910,7 +906,7 @@ const copy = `
 | ext    | extension to be used for dest files. |
 `;
 
-const App: () => React$Node = () => {
+const App: () => React.ReactNode = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -992,7 +988,7 @@ import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 
 import Markdown from '@novastera-oss/react-native-markdown-display';
 
-const copy = `[This is a link!](https://github.com/iamacup/react-native-markdown-display/)`;
+const copy = `[This is a link!](https://novastera.com)`;
 
 const onLinkPress = (url) => {
     if (url) {
@@ -1005,7 +1001,7 @@ const onLinkPress = (url) => {
     return true
   }
 
-const App: () => React$Node = () => {
+const App: () => React.ReactNode = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -1034,7 +1030,7 @@ export default App;
 <details><summary>Using a Custom Rule</summary>
 <p>
 
-You will need to overwrite one or both of `link` and `blocklink`, the original defenitions can be [found here](https://github.com/iamacup/react-native-markdown-display/blob/master/src/lib/renderRules.js)
+You will need to overwrite one or both of `link` and `blocklink`, the original definitions can be found here: https://github.com/novastera/react-native-markdown-display/blob/master/src/lib/renderRules.tsx
 
 Something like this with `yourCustomHandlerFunctionOrLogicHere`:
 
@@ -1044,7 +1040,7 @@ import { SafeAreaView, ScrollView, StatusBar, Text } from 'react-native';
 
 import Markdown from '@novastera-oss/react-native-markdown-display';
 
-const copy = `[This is a link!](https://github.com/iamacup/react-native-markdown-display/)`;
+const copy = `[This is a link!](https://novastera.com)`;
 
 const rules = {
   link: (node, children, parent, styles) => {
@@ -1056,7 +1052,7 @@ const rules = {
   },
 };
 
-const App: () => React$Node = () => {
+const App: () => React.ReactNode = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -1085,7 +1081,7 @@ export default App;
 
 # Disabling Specific Types of Markdown
 
-You can dissable any type of markdown you want, which is very useful in a mobile environment, by passing the markdownit property like below. Note that for convenience we also export the `MarkdownIt` instance so you don't have to include it as a project dependency directly just to remove some types of markdown.
+You can disable any type of markdown you want, which is very useful in a mobile environment, by passing the markdownit property like below. Note that for convenience we also export the `MarkdownIt` instance so you don't have to include it as a project dependency directly just to remove some types of markdown.
 
 This example will stop images and links.
 
@@ -1101,7 +1097,7 @@ const copy = `
 [but this link will just](be displayed as this text)
 `;
 
-const App: () => React$Node = () => {
+const App: () => React.ReactNode = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -1126,12 +1122,12 @@ const App: () => React$Node = () => {
 export default App;
 ```
 
-A full list of things you can turn off is [here](https://github.com/markdown-it/markdown-it/blob/master/lib/presets/commonmark.js)
+A full list of things you can turn off lives in the markdown-it CommonMark preset (the preset list may move across releases). You can also configure this renderer by supplying your own markdown-it instance; see the markdown-it docs for preset and rule options: https://github.com/markdown-it/markdown-it
 
 
 ### Pre Processing
 
-It is possible to need to pre-process the data outside of this library ([related discussion here](https://github.com/iamacup/react-native-markdown-display/issues/79)). As a result, you can pass an AST tree directly as the children like this:
+It is possible to need to pre-process the data outside of this library. As a result, you can pass an AST tree directly as the children like this:
 
 ```jsx
 import React from 'react';
@@ -1149,7 +1145,7 @@ This is some text with **BOLD!**
 
 const ast = tokensToAST(stringToTokens(copy, markdownItInstance))
 
-const App: () => React$Node = () => {
+const App: () => React.ReactNode = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -1174,11 +1170,11 @@ export default App;
 
 ### Other Notes
 
-This is a fork of [react-native-markdown-renderer](https://github.com/mientjan/react-native-markdown-renderer), a library that unfortunately has not been updated for some time so i took all of the outstanding pull requests from that library and tested + merged as necessary.
+See [iamacup/react-native-markdown-display](https://github.com/iamacup/react-native-markdown-display) for the legacy fork lineage. This project removes unmaintained libraries and uses TypeScript.
 
 ## About Novastera
 
-This library is part of the Novastera open-source ecosystem, a modern CRM/ERP
+This library is part of the Novastera CRM/ERP open-source ecosystem, a modern
 platform designed for the next generation of business applications. Novastera
 combines AI capabilities with comprehensive business management tools, enabling
 organizations to leverage on-device AI for enhanced productivity and data
