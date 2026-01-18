@@ -288,44 +288,72 @@ const renderRules: RenderRules = {
     allowedImageHandlers,
     defaultImageHandler,
   ) => {
-    const {src, alt} = node.attributes as {src?: string; alt?: string};
+    const {
+      src,
+      alt,
+      width,
+      height,
+      contentFit,
+      contentPosition,
+    } = node.attributes as Record<string, string | number | undefined>;
 
     if (!src) {
       return null;
     }
+    const srcValue = String(src);
 
     // we check that the source starts with at least one of the elements in allowedImageHandlers
     const show =
       allowedImageHandlers.filter((value: string) => {
-        return src.toLowerCase().startsWith(value.toLowerCase());
+        return srcValue.toLowerCase().startsWith(value.toLowerCase());
       }).length > 0;
 
     if (show === false && defaultImageHandler === null) {
       return null;
     }
 
-    const imageUri = show === true ? src : `${defaultImageHandler ?? ''}${src}`;
+    const imageUri =
+      show === true ? srcValue : `${defaultImageHandler ?? ''}${srcValue}`;
+    const widthValue =
+      typeof width === 'number' ? width : width ? Number(width) : undefined;
+    const heightValue =
+      typeof height === 'number' ? height : height ? Number(height) : undefined;
+    const sizeStyle =
+      Number.isFinite(widthValue) || Number.isFinite(heightValue)
+        ? {
+            ...(Number.isFinite(widthValue) ? {width: widthValue} : {}),
+            ...(Number.isFinite(heightValue) ? {height: heightValue} : {}),
+          }
+        : undefined;
 
-    const imageProps: {
-      key: string;
-      style: object;
+    const imageProps: Record<string, unknown> & {
+      style: object | object[];
       source: {uri: string};
       accessible?: boolean;
       accessibilityLabel?: string;
     } = {
-      key: node.key,
-      style: styles._VIEW_SAFE_image as object,
+      style: sizeStyle
+        ? [styles._VIEW_SAFE_image as object, sizeStyle]
+        : (styles._VIEW_SAFE_image as object),
       source: {
         uri: imageUri,
       },
     };
 
-    if (alt) {
+    if (typeof contentFit === 'string') {
+      imageProps.contentFit = contentFit;
+    }
+
+    if (typeof contentPosition === 'string') {
+      imageProps.contentPosition = contentPosition;
+    }
+
+    if (typeof alt === 'string' && alt.length > 0) {
       imageProps.accessible = true;
       imageProps.accessibilityLabel = alt;
     }
 
-    return <Image {...imageProps} />;
+    return <Image key={node.key} {...imageProps} />;
   }),
 
   // Text Output

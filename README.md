@@ -287,6 +287,8 @@ And some additional, less used options:
 <details><summary>Images</summary>
 <p>
 
+You can pass image attributes (e.g. `width`, `height`, `contentFit`, `contentPosition`) via markdown-it attributes or HTML to map onto Expo Image props.
+
 ```
   ![Minion](https://octodex.github.com/images/minion.png)
   ![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
