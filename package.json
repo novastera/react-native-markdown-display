@@ -1,6 +1,6 @@
 {
   "name": "@novastera-oss/react-native-markdown-display",
-  "version": "8.0.0",
+  "version": "8.1.1",
   "description": "Markdown renderer for react-native, with CommonMark spec support. Maintained by Novastera.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -45,15 +45,15 @@
   },
   "homepage": "https://novastera.com",
   "dependencies": {
-    "markdown-it": "^14.1.0",
-    "expo-image": "^3.0.0"
+    "markdown-it": "^14.1.1",
+    "expo-image": "^55.0.0"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-native": ">=0.79.0"
   },
   "devDependencies": {
-    "@types/markdown-it": "^14.1.0",
+    "@types/markdown-it": "^14.1.2",
     "@types/react": "^19.0.0",
     "@babel/core": "^7.9.6",
     "@babel/runtime": "^7.9.6",
